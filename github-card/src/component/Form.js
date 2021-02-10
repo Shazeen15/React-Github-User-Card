@@ -40,7 +40,6 @@ export class Form extends Component {
   };
 
   render() {
-    console.log(this.state.github);
     return (
       <>
         {this.state.searchError && <h1>{this.state.searchError}</h1>}
@@ -55,11 +54,6 @@ export class Form extends Component {
           />
           <button>Search</button>
         </form>
-        {Object.keys(this.state.github).length === 0 ? (
-          <Loading />
-        ) : (
-          <GithubCard github={this.state.github} error={this.props.error} />
-        )}
       </>
     );
   }

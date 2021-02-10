@@ -6,27 +6,14 @@ import Loading from "./Loading";
 export class Form extends Component {
   state = {
     hubUser: "",
-    github: this.props.github,
+    github: {},
     searchError: "",
   };
 
-  componentDidUpdate(prevState, prevProps) {
-    if (prevState.github !== this.state.github) {
-      if (Object.keys(this.state.github).length === 0) {
-        axios
-          .get(`https://api.github.com/users/shazeen15`)
-          .then((res) => {
-            this.setState({
-              github: res.data,
-            });
-          })
-          .catch((err) => {
-            this.setState({
-              error: err.message,
-            });
-          });
-      }
-    }
+  componentDidMount() {
+    this.setState({
+      github: this.props.github,
+    });
   }
 
   handleUserChange = (e) => {
@@ -58,7 +45,7 @@ export class Form extends Component {
       <>
         {this.state.searchError && <h1>{this.state.searchError}</h1>}
         <form onSubmit={this.searchNewUser}>
-          <label htmlFor="hubUser">Search Github Users </label>
+          <label htmlFor="hubUser">Search Github Users</label>
           <input
             type="text"
             name="hubUser"
